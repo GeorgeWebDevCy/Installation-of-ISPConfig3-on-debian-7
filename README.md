@@ -20,7 +20,7 @@ iface eth0 inet static
 External IP         Fully Qualified Domain Name       Hostname
 xxx.xxx.xxx.xxx     machine1.example.com              machine1
 
-11. Assuming you what ssh access to your server do this apt-get install openssh-server
+11. Assuming you want ssh access to your server do this apt-get install openssh-server
 12. apt-get update && apt-get upgrade
 13. apt-get install unzip
 14. cd /tmp
@@ -28,11 +28,11 @@ xxx.xxx.xxx.xxx     machine1.example.com              machine1
 16. unzip master.zip
 17. cd ispconfig_setup-master
 18. During installation we selected all defaults except that for XCache we said No since we need ioncube loader for softaculous later
-19. We selected Roundcure as our webmail interfaces
+19. We selected Roundcure as our webmail interfaces\ not squirrelmail
 20. Configure phpmyadmin with db-config? must be No
 21. Answered no to backports
 22.  nano /var/lib/roundcube/plugins/ispconfig3_account/config/config.inc.php
-and and the username and password of the REmote user you created for ISPConfig. Don't change the url in the file
+and set the username and password of the Remote user you created for ISPConfig. Don't change the url in the file
 
 23. Download the latest ioncube loaders with wget and unpack the archive:
 cd /tmp
@@ -47,16 +47,16 @@ Configure PHP
 
 Now edit the php.ini files with a editor like vi or nano:
 For mod_php:
-vi /etc/php5/apache2/php.ini
+nano /etc/php5/apache2/php.ini
 
 For CGI and FCGI PHP:
-vi /etc/php5/cgi/php.ini
+nano /etc/php5/cgi/php.ini
 
 For PHP commandline scripts:
-vi /etc/php5/cli/php.ini
+nano /etc/php5/cli/php.ini
 
 For scripts running with PHP-FPM
-vi /etc/php5/fpm/php.ini
+nano /etc/php5/fpm/php.ini
 
 and add the following line right at the beginning of the file(s) (before the [PHP] line):
 zend_extension = /usr/local/ioncube/ioncube_loader_lin_5.4.so
@@ -81,7 +81,7 @@ service php5-fpm restart
 wget -N http://files.softaculous.com/install.sh
 chmod 755 install.sh
 
-When asked for username and password use the data for the remote user you created in ISPConfig3
+When asked for username and password use the data for the remote user you created in ISPConfig3. To avoid the "softaculous the installation package could not be found" error
 
 Append the following lines in /usr/local/softaculous/php.ini
 extension=mysqlnd.so
@@ -101,7 +101,10 @@ extension=soap.so
 extension=posix.so
 extension=json.so
 
-25. chown -R root:root /usr/local/softaculous/bin/soft
 
-Restart server Softaculous works 100% Now
-You need a license for auto install of most apps
+
+25. To avoid white screen when entering softaculous from inside ISPConfig3 issue the command
+chown -R root:root /usr/local/softaculous/bin/soft
+
+Restart server Softaculous works 100% now
+You need a license for auto install of most apps but try smf which is free as a test
