@@ -75,4 +75,33 @@ service apache2 restart
 
 When you use PHP-FPM, then restart the PHP-FPM pool daemon as well:
 service php5-fpm restart
-.............................................to be ocntinued
+
+24. Install Softaculous
+--------------------------
+wget -N http://files.softaculous.com/install.sh
+chmod 755 install.sh
+
+When asked for username and password use the data for the remote user you created in ISPConfig3
+
+Append the following lines in /usr/local/softaculous/php.ini
+extension=mysqlnd.so
+extension=mysql.so
+extension=mysqli.so
+extension=curl.so
+extension=soap.so
+extension=posix.so
+extension=json.so
+
+Also create the directory /usr/local/softaculous/conf and create the file /usr/local/softaculous/conf/custom.ini with the contents below. So when Softaculous is upgraded to newer version, it will check for php options added by user in custom.ini and will append the contents in new /usr/local/softaculous/php.ini
+extension=mysqlnd.so
+extension=mysql.so
+extension=mysqli.so
+extension=curl.so
+extension=soap.so
+extension=posix.so
+extension=json.so
+
+25. chown -R root:root /usr/local/softaculous/bin/soft
+
+Restart server Softaculous works 100% Now
+You need a license for auto install of most apps
